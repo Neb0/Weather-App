@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    
+    //API
+    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
+    let APP_ID = "ed3cda67935447de80e4439d9c7245e9"
+    
+    let locationManager = CLLocationManager()
 
     
     //linked IBOutlets
@@ -22,8 +29,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //locationManager set up
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        
     }
+    
+    //MARK: - Networking//
+    /******************************************************************************/
+    
+    
 
 
 }
