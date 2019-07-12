@@ -18,6 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let APP_ID = "ed3cda67935447de80e4439d9c7245e9"
     
     let locationManager = CLLocationManager()
+    let weatherDataModel = WeatherDataModel()
 
     
     //linked IBOutlets
@@ -50,6 +51,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             if response.result.isSuccess {
                 print("Success! Data delivered")
                 
+                let weatherJSON : JSON = JSON(response.result.value!)
+                
+                self.updateWeatherData(json: weatherJSON)
+                
             }
             else {
                 print("Error \(String(describing: response.result.error))")
@@ -60,6 +65,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: - JSON parsing//
     /******************************************************************************/
+    //Update weahter data method//
+    func updateWeatherData (json : JSON) {
+        if let tempResult = json["main"]["temp"].double {
+        
+            weatherDataModel.temperature = Int(tempResult - 273.15)
+            weatherDataModel.city = json["name"].stringValue
+            weatherDataModel.condition = json["weather"][0]["id"].intValue
+            weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+        } else {
+            cityLabel.text = "Weather is Unavaileble"
+        }
+        
+        
+    }
     
     
     //MARK: - UI Upd
@@ -73,6 +92,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
 
             print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
             
