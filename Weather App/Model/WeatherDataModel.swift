@@ -27,40 +27,40 @@ class WeatherDataModel {
         switch (condition) {
             
         case 0...300 :
-            return "tstorm1"
+            return "Stormy"
             
         case 301...500 :
-            return "light_rain"
+            return "Light Rainy"
             
         case 501...600 :
-            return "shower3"
+            return "Rainy"
             
         case 601...700 :
-            return "snow4"
+            return "Snowwy"
             
         case 701...771 :
-            return "fog"
+            return "Foggy"
             
         case 772...799 :
-            return "tstorm3"
+            return "Stormy"
             
         case 800 :
-            return "sunny"
+            return "Sunny"
             
         case 801...804 :
-            return "cloudy2"
+            return "Clouddy"
             
         case 900...903, 905...1000  :
-            return "tstorm3"
+            return "Stormy"
             
         case 903 :
-            return "snow5"
+            return "Snowwy"
             
         case 904 :
-            return "sunny"
+            return "Sunny"
             
         default :
-            return "dunno"
+            return "Checking"
         }
         
     }

@@ -77,12 +77,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             cityLabel.text = "Weather is Unavaileble"
         }
         
+        updateUIWithWeatherData()
         
     }
     
     
     //MARK: - UI Upd
     /******************************************************************************/
+    
+    //Update UI method//
+    func updateUIWithWeatherData() {
+        cityLabel.text = weatherDataModel.city
+        temperatureLabel.text = "\(weatherDataModel.temperature)"
+        weatherLabel.text = weatherDataModel.weatherIconName
+        weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+    }
     
     //MARK: - Location Manager Delegate methods//
     /******************************************************************************/
